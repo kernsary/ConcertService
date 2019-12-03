@@ -41,7 +41,7 @@ public class DataLoader implements ApplicationRunner {
         Musician alan = new Musician("Alan", "guitar");
         musicianRepository.save(alan);
 
-        Musician niamh = new Musician("Niamn", "fiddle");
+        Musician niamh = new Musician("Niamh", "fiddle");
         musicianRepository.save(niamh);
 
         Musician joanne = new Musician("Joanne", "accordion");
@@ -52,8 +52,9 @@ public class DataLoader implements ApplicationRunner {
         musicianRepository.save(niamh);
 
         solas.addMusician(alan);
-        solas.addMusician(joanne);
+        birlinn.addMusician(joanne);
         bandRepository.save(solas);
+        bandRepository.save(birlinn);
 
     }
 }
