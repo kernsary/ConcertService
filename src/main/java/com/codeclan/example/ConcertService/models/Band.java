@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "bands")
@@ -13,7 +14,7 @@ public class Band {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(name = "name")
     private String name;
 
     @ManyToOne
@@ -23,24 +24,28 @@ public class Band {
     @JsonIgnoreProperties("band")
     @ManyToMany
     @JoinTable(
-            name = "bands-musicians",
+            name = "bands_musicians",
             joinColumns = {@JoinColumn(
                     name = "band_id",
                     nullable = false,
                     updatable = false
             )},
             inverseJoinColumns = {@JoinColumn(
-                    name = "musician-id",
+                    name = "musician_id",
                     nullable = false,
                     updatable = false
             )}
     )
-    private ArrayList<Musician> musicians;
-
+    private List<Musician> musicians;
+//
     public Band(String name, Concert concert) {
         this.name = name;
         this.concert = concert;
         this.musicians = new ArrayList<>();
+    }
+
+    public Band(){
+
     }
 
     public Long getId(){
@@ -55,8 +60,24 @@ public class Band {
         return concert;
     }
 
-    public ArrayList<Musician> getMusicians() {
+    public List<Musician> getMusicians() {
         return musicians;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setConcert(Concert concert) {
+        this.concert = concert;
+    }
+
+    public void setMusicians(List<Musician> musicians) {
+        this.musicians = musicians;
     }
 
     public void addMusician(Musician musician) {
